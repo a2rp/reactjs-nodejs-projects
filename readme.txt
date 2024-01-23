@@ -17,7 +17,10 @@ after the installation completes type undergiven command in prompt to start the 
 npm run start
 
 now you can use the application
+for any message or error please check command prompt in backend [command prompt] and
+developers console in the browser [frontend]
 
 app1
-hello world application
+get message from backend node.js and
+display in the frontend react.js
 
