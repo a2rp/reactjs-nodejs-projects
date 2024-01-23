@@ -20,6 +20,8 @@ now you can use the application
 for any message or error please check command prompt in backend and
 developers console in the browser [frontend]
 
+you have output images in readme file present in frontend folder of every project 
+
 app1
 get message from backend node.js and display in the frontend react.js
 node packages required
