@@ -1,19 +1,21 @@
-here is the details of the reactjs and nodejs projects
-
 to run any of the "reactjs" and "nodejs" projects given here
-you need ot have "node" installed on your system "https://nodejs.org/"
+you need to have "node" installed on your system "https://nodejs.org/"
 
 to run any project
-go inside its "backend" folder [the root folder] and 
-open command prompt in that folder then type
+go inside its "backend" folder [root folder backend] and 
+open command prompt in that folder then type and run run undergiven command in the command prompt
 npm install
-after installation is complete run undergiven command to start the backend
+
+after installation is complete type and run run undergiven command in the command prompt to start the backend
 npm run start:dev
-after backend starts go to frontend folder
-open command prompt in that folder then type
+
+after backend starts go to frontend folder [root folder frontend]
+open command prompt in that folder then type and run undergiven command
 npm install
-after the installation completes type undergiven command in prompt to run the frontend
+
+after the installation completes type undergiven command in prompt to start the frontend
 npm run start
+
 now you can use the application
 
 app1
