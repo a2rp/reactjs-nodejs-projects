@@ -27,3 +27,9 @@ get message from backend node.js and display in the frontend react.js
 node packages required
 backend: cors, express
 frontend: axios 
+
+app2
+make payment with stripe
+node packages required
+backend: cors, dotenv, express, stripe
+frontend: axios 
