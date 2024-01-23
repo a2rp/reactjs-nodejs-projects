@@ -22,5 +22,6 @@ developers console in the browser [frontend]
 
 app1
 get message from backend node.js and display in the frontend react.js
+node packages required
 backend: cors, express
 frontend: axios 
