@@ -5,7 +5,7 @@ const App = () => {
     axios.defaults.baseURL = "http://localhost:1198/api";
 
     const [isLoading, setIsLoading] = useState(false);
-    const [message, setMessage] = useState("click the button to receive message from backend");
+    const [message, setMessage] = useState("message");
 
     const getMessage = async () => {
         try {
@@ -30,10 +30,12 @@ const App = () => {
             <h1>app1</h1>
             Hello World!
             <div style={{ marginTop: "15px" }}>
-                <button onClick={getMessage} disabled={isLoading}>click here {setIsLoading === true ? "Loading" : ""}</button>
+                <button onClick={getMessage} disabled={isLoading}>
+                    click here to receive message from backend {setIsLoading === true ? "Loading" : ""}
+                </button>
             </div>
             <div style={{ marginTop: "15px" }}>
-                {message}
+                {message} <button onClick={() => setMessage("click the button above to receive message from backend")}>clear message</button>
             </div>
         </div>
     )
