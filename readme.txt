@@ -33,3 +33,6 @@ make payment with stripe
 node packages required
 backend: cors, dotenv, express, stripe
 frontend: axios 
+
+app3 
+change website language
