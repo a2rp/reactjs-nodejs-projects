@@ -41,3 +41,8 @@ app4
 hospital management system
 backend: cors, express, mongoose
 frontend: material ui, axios, react, react-router-dom, react-toastify, sass, sweetalert2
+
+app4
+event management
+backend: cors, express, mongoose
+frontend: material ui, axios, moment.js, react, react-toastify, sweetalert2
