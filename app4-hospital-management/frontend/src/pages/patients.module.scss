@@ -1,0 +1,31 @@
+.container {
+    .addPatientContainer {
+        .heading {
+            font-size: 16px;
+        }
+
+        .addPatientForm {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: aliceblue;
+            border: 1px solid #000;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+    }
+
+    .patientsList {
+        margin-top: 15px;
+
+        .heading {
+            font-size: 16px;
+        }
+
+        .actionButtonsContainer {
+            display: flex;
+            gap: 15px;
+        }
+    }
+}

@@ -1,0 +1,11 @@
+GET http://localhost:1198/patients/
+
+###
+POST http://localhost:1198/patients/add
+Content-Type: application/json
+
+{
+    "name": "auraj kumar",
+    "age": 37,
+    "gender": "male"
+}
