@@ -18,11 +18,9 @@ const Patients = () => {
             try {
                 const response = await axios.get("/patients");
                 const data = response.data;
-                console.log(data, "Patients");
                 setPatients(data);
             } catch (error) {
-                console.log(error, "error");
-                toast(error.response.data);
+                toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
             }
         };
         getAllPatients();
@@ -38,8 +36,7 @@ const Patients = () => {
             setPatients([...patients, data]);
             setNewPatient({ name: "", age: "", gender: "" });
         } catch (error) {
-            console.log(error);
-            toast(error.response.data);
+            toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
         }
     };
 
@@ -50,14 +47,12 @@ const Patients = () => {
         try {
             axios.post(`/patients/update/${id}`, selectedPatient).then(response => {
                 const updatePat = { ...selectedPatient, _id: id };
-                console.log("update patient", updatePat);
                 setPatients(patients.map(patient => (patient._id === id ? updatePat : patient)));
                 setSelectedPatient(null);
                 setIsEditMode(false); // Switch back to Add mode
-            }).catch(error => console.error("Error updating patient:", error));
+            }).catch(error => toast.error(error.response?.data?.error || error.message));
         } catch (error) {
-            console.log(error, "Error updating patient");
-            toast(error.response.data);
+            toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
         }
     };
 
@@ -80,13 +75,11 @@ const Patients = () => {
     const deletePatient = async (id) => {
         try {
             axios.delete(`/patients/delete/${id}`).then(response => {
-                console.log(response.data);
                 setSelectedPatient(null);
                 setPatients(patients.filter(patient => patient._id !== id));
-            }).catch(error => console.error("Error deleting patient:", error));
+            }).catch(error => toast.error(error.response?.data?.error || error.message));
         } catch (error) {
-            console.log(error, "error deleting patient");
-            toast(error.response.data);
+            toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
         }
     };
 

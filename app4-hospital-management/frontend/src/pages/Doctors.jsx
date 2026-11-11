@@ -17,10 +17,9 @@ const Doctors = () => {
             try {
                 const response = await axios.get("/doctors");
                 const data = response.data;
-                console.log(data, "all doctors");
                 setDoctors(data);
             } catch (error) {
-                toast(error.response.data);
+                toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
             }
         };
         getDoctors();
@@ -32,12 +31,10 @@ const Doctors = () => {
         try {
             const response = await axios.post("/doctors/add", newDoctor);
             const data = response.data;
-            console.log(data, "add doctor data");
             setDoctors([...doctors, data]);
             setNewDoctor({ name: "", speciality: "" });
         } catch (error) {
-            console.log(error, "error");
-            toast(error.response.data);
+            toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
         }
     };
 
@@ -48,13 +45,11 @@ const Doctors = () => {
             const response = await axios.post(`/doctors/update/${id}`, selectedDoctor);
             const data = response.data;
             const updateDoc = { ...selectedDoctor, _id: id };
-            console.log("update doc", updateDoc);
             setDoctors(doctors.map(doctor => (doctor._id === id ? updateDoc : doctor)));
             setSelectedDoctor(null);
             setIsEditMode(false);
         } catch (error) {
-            console.log(error, "error");
-            toast(error.response.data);
+            toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
         }
     };
 
@@ -78,11 +73,9 @@ const Doctors = () => {
         try {
             const response = await axios.delete(`/doctors/delete/${id}`);
             const data = response.data;
-            console.log(response.data);
             setDoctors(doctors.filter(doctor => doctor._id !== id));
         } catch (error) {
-            console.log(error, "error");
-            toast(error.response.data);
+            toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
         }
     };
 

@@ -1,24 +1,31 @@
+require("dotenv").config();
+
+const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
-const bodyParser = require("body-parser");
 const patientsRouter = require("./src/routes/patients");
 const doctorsRouter = require("./src/routes/doctors");
-const appoinmentsRouter = require("./src/routes/appointments")
+const appointmentsRouter = require("./src/routes/appointments");
+
 const app = express();
 const PORT = process.env.PORT || 1198;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/hospital";
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-mongoose.connect("mongodb://127.0.0.1:27017/hospital",);
-const connection = mongoose.connection;
-connection.once("open", () => { console.log("MongoDB database connection established successfully"); });
-
+app.use(cors({ origin: process.env.FRONTEND_ORIGIN || "http://localhost:3000" }));
+app.use(express.json({ limit: "50kb" }));
+app.use(express.urlencoded({ extended: false, limit: "50kb" }));
 app.use("/patients", patientsRouter);
 app.use("/doctors", doctorsRouter);
-app.use("/appointments", appoinmentsRouter)
+app.use("/appointments", appointmentsRouter);
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+async function startServer() {
+    try {
+        await mongoose.connect(MONGODB_URI);
+        app.listen(PORT, () => console.log(`Hospital demo API listening on port ${PORT}`));
+    } catch {
+        console.error("Could not connect to MongoDB. Check MONGODB_URI and ensure MongoDB is running.");
+        process.exitCode = 1;
+    }
+}
 
+startServer();

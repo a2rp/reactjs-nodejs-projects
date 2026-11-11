@@ -3,10 +3,9 @@ const app = express();
 const PORT = process.env.PORT || 1198;
 const cors = require("cors");
 
-app.use(cors());
+app.use(cors({ origin: process.env.FRONTEND_URL || "http://localhost:3000" }));
 
 app.get("/api/a2rp", (req, res) => {
-    console.log("a2rp: an Ashish Ranjan presentation");
     res.json({ success: true, message: "a2rp: an Ashish Ranjan presentation" });
 });
 

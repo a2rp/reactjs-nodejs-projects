@@ -26,6 +26,10 @@ router.post("/add", (req, res) => {
 router.post("/update/:id", (req, res) => {
     try {
         Appointment.findById(req.params.id).then(appointment => {
+            if (!appointment) {
+                return res.status(404).json("Appointment not found");
+            }
+
             appointment.patientName = req.body.patientName;
             appointment.doctorName = req.body.doctorName;
             appointment.date = req.body.date;
@@ -42,11 +46,12 @@ router.delete("/delete/:id", async (req, res) => {
     try {
         console.log(req.params.id, "req.params.id");
         const response = await Appointment.findByIdAndDelete(req.params.id);
-        console.log(response, "delete response");
+        if (!response) {
+            return res.status(404).json({ success: false, message: "Appointment not found." });
+        }
         res.json({ success: true, message: "Appointment deleted." });
     } catch (error) {
-        console.log(error, "Error deleting appointment");
-        res.json({ success: false, message: error.message });
+        res.status(400).json({ success: false, message: "Unable to delete appointment." });
     }
 });
 

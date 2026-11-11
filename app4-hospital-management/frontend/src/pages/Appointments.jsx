@@ -20,12 +20,11 @@ const Appointments = () => {
                 const data = response.data;
                 setPatients(data);
             } catch (error) {
-                toast(error.response.data);
+                toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
             }
         };
         getAllPatients();
     }, []);
-    useEffect(() => { console.log(patients, "patients"); }, [patients]);
 
     useEffect(() => {
         const getAllPatients = async () => {
@@ -34,12 +33,11 @@ const Appointments = () => {
                 const data = response.data;
                 setDoctors(data);
             } catch (error) {
-                toast(error.response.data);
+                toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
             }
         };
         getAllPatients();
     }, []);
-    useEffect(() => { console.log(doctors, "doctors"); }, [doctors]);
 
     // get all appointments
     useEffect(() => {
@@ -61,18 +59,15 @@ const Appointments = () => {
         try {
             const response = await axios.post("/appointments/add", newAppointment);
             const data = response.data;
-            console.log(data, "data add appointment");
             setAppointments([...appointments, data]);
             setNewAppointment({ patientName: "", doctorName: "", date: new Date().toISOString().split("T")[0] });
         } catch (error) {
-            console.log(error);
-            toast(error.response.data);
+            toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
         }
     };
 
     // edit click appointment
     const handleEditAppointment = (appointment) => {
-        console.log(appointment, "Appointment selected");
         const selected = { ...appointment, date: appointment.date.split("T")[0] };
         setSelectedAppointment(selected);
         setIsEditMode(true);
@@ -85,15 +80,13 @@ const Appointments = () => {
         try {
             const response = await axios.post(`/appointments/update/${id}`, selectedAppointment);
             const data = response.data;
-            console.log(data, "update appointment data");
             const updateApp = { ...selectedAppointment, _id: id };
             setAppointments(appointments.map(appointment => (appointment._id === id ? updateApp : appointment)));
             setNewAppointment({ patientName: "", doctorName: "", date: new Date().toISOString().split("T")[0] });
             setSelectedAppointment(null);
             setIsEditMode(false);
         } catch (error) {
-            console.log(error);
-            toast(error.response.data);
+            toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
         }
     };
 
@@ -117,11 +110,9 @@ const Appointments = () => {
         try {
             const response = await axios.delete(`/appointments/delete/${id}`);
             const data = response.data;
-            console.log(data, "delete appointment data");
             setAppointments(appointments.filter(appointment => appointment._id !== id));
         } catch (error) {
-            console.log(error);
-            toast(error.response.data);
+            toast.error(error.response?.data?.error || error.response?.data?.message || error.message);
         }
     };
 
